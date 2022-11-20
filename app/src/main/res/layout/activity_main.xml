@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+   <!--to display current user-->
+   <androidx.cardview.widget.CardView
+       android:id="@+id/userCardView"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="@dimen/_8sdp"
+       android:layout_marginTop="@dimen/_5sdp"
+       android:layout_marginEnd="@dimen/_8sdp"
+       app:cardElevation="@dimen/_5sdp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintBottom_toTopOf="@id/rvMain"
+       app:layout_constraintTop_toTopOf="parent">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:background="@color/app_color_current_user"
+          android:layout_height="wrap_content">
+
+
+         <TextView
+             android:id="@+id/txtUserName"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="@dimen/_5sdp"
+             android:ellipsize="end"
+             android:paddingTop="@dimen/_2sdp"
+             android:maxLines="2"
+             android:minLines="1"
+             android:textColor="@color/black"
+             android:textSize="@dimen/title_text_size"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             tools:text="Name" />
+
+         <TextView
+             android:id="@+id/txtUserAge"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="@dimen/_5sdp"
+             android:layout_marginTop="@dimen/_3sdp"
+             android:minLines="1"
+             android:textColor="@color/black"
+             android:textSize="@dimen/subtitle_text_size"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/txtUserName"
+             tools:text="Age" />
+
+         <TextView
+             android:id="@+id/txtUserDateOfBirth"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="@dimen/_5sdp"
+             android:layout_marginTop="@dimen/_3sdp"
+             android:paddingBottom="@dimen/_2sdp"
+             android:ellipsize="end"
+             android:minLines="1"
+             android:textColor="@color/black"
+             android:textSize="@dimen/subtitle_text_size"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/txtUserAge"
+             tools:text="Date of Birth" />
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+   </androidx.cardview.widget.CardView>
+
+
+   <!--to display all users-->
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rvMain"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/_480sdp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       tools:listitem="@layout/lv_item_users"
+       android:layout_marginTop="@dimen/_15sdp"
+       tools:itemCount="3"
+       app:layout_constraintTop_toBottomOf="@+id/userCardView"
+       app:layout_constraintBottom_toBottomOf="parent"
+       />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

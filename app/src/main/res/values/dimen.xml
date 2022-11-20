@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title_text_size">@dimen/_15ssp</dimen>
+    <dimen name="subtitle_text_size">@dimen/_13ssp</dimen>
+    <dimen name="big_textSize">@dimen/_30ssp</dimen>
+    <dimen name="medium_textSize">@dimen/_20ssp</dimen>
+
+    <!--Edit text -->
+    <dimen name="editText_height">@dimen/_40sdp</dimen>
+    <dimen name="editText_width">@dimen/_60sdp</dimen>
+
+
+
+</resources>
