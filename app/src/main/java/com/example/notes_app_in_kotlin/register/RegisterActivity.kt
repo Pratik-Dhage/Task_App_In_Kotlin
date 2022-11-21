@@ -12,6 +12,7 @@ import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
 import com.example.notes_app_in_kotlin.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
@@ -19,7 +20,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRegisterBinding
     private lateinit var view : View
     private lateinit var auth : FirebaseAuth
-    private lateinit var database : FirebaseDatabase
+    private lateinit var database : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_register)
         view= binding.root
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
+        database = FirebaseDatabase.getInstance().getReference("Users")
     }
 
     private fun onClickListener() {
@@ -101,11 +102,17 @@ class RegisterActivity : AppCompatActivity() {
 
                        val users : Users = Users(fullName,email,password,age,dob)
 
-                        val id: String = it.result.user?.uid ?: ""
+                       val id: String = it.result.user?.uid ?: ""
                         // save data in RealTime Database
-                        database.reference.child("Users").child(id).setValue(users)
+                        database.child("Users").child(id).setValue(users).addOnSuccessListener {
 
-                        Global.showSnackBar(view,resources.getString(R.string.user_added_successfully))
+                            Global.showSnackBar(view,resources.getString(R.string.user_added_successfully))
+
+                         // clear all fields
+                            clearFields()
+                        }.addOnFailureListener{
+                            Global.showSnackBar(view,resources.getString(R.string.something_went_wrong_error))
+                        }
                     }
 
                     else{
@@ -119,6 +126,15 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             return true }
+    }
+
+    private fun clearFields(){
+        binding.edtFullName.text?.clear()
+        binding.edtEmail.text?.clear()
+        binding.edtPass.text?.clear()
+        binding.edtAge.text?.clear()
+        binding.edtDob.text?.clear()
+
     }
 
     override fun onBackPressed() {

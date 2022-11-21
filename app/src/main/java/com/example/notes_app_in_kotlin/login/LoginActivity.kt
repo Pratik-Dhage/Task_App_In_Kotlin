@@ -12,6 +12,7 @@ import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
 import com.example.notes_app_in_kotlin.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity() {
@@ -20,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var  view : View
     private var isUserLoggedIn : Boolean = false
     private lateinit var auth : FirebaseAuth
-    private lateinit var database : FirebaseDatabase
+    private lateinit var database : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
         view= binding.root
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
+        database = FirebaseDatabase.getInstance().getReference("Users")
     }
 
     private fun onClickListener() {
@@ -50,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
                          val i = Intent(this, MainActivity::class.java)
                          startActivity(i)
                      }
-
                 }
                 else{
                     Global.showSnackBar(view,resources.getString(R.string.no_internet))
@@ -64,7 +64,6 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.edtEmail.text.toString().trim()
         val password = binding.edtPass.text.toString().trim()
 
-
         if (email.isEmpty()  ){
             Global.showSnackBar(view,resources.getString(R.string.email_error))
             return false
@@ -76,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         else
-
 
         return true
 

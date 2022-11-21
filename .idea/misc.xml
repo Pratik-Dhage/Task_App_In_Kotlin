@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/drawable/bg_button.xml" value="0.123" />
+        <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/drawable/splash_screen.xml" value="0.123" />
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/drawable/task_event_note_24.xml" value="0.1" />
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/layout/activity_main.xml" value="0.165625" />

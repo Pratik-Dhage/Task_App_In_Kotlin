@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "608511389503",
+    "firebase_url": "https://task-app-in-kotlin-default-rtdb.firebaseio.com",
     "project_id": "task-app-in-kotlin",
     "storage_bucket": "task-app-in-kotlin.appspot.com"
   },

@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="splashTheme" parent="Theme.Notes_App_In_Kotlin">
+    <item name="android:windowBackground" type="drawable">@drawable/splash_screen</item>
+        <item name="android:statusBarColor" type="color">@color/white</item>
+
+    </style>
 </resources>
