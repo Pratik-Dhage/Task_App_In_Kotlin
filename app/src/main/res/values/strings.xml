@@ -31,8 +31,10 @@
     <string name="email_error">Enter Proper Email</string>
     <string name="password_error">Enter Proper Password</string>
     <string name="age_error">Enter Proper Age</string>
+    <string name="dob_error">Enter Proper Date of Birth</string>
     <string name="something_went_wrong_error"> Oops! Something Went Wrong</string>
     <string name="home">Home</string>
+    <string name="user_added_successfully">User Added Successfully</string>
 
 
 </resources>

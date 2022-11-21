@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/drawable/bg_button.xml" value="0.123" />
-        <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/drawable/task_event_note_24.xml" value="0.1" />
+        <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/layout/activity_main.xml" value="0.165625" />
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/layout/lv_item_users.xml" value="0.22" />
+        <entry key="..\:/Notes_App_In_Kotlin/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11" />
       </map>
     </option>
   </component>

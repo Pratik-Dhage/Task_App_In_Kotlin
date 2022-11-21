@@ -9,13 +9,18 @@ import com.example.notes_app_in_kotlin.MainActivity
 import com.example.notes_app_in_kotlin.R
 import com.example.notes_app_in_kotlin.databinding.ActivityLoginBinding
 import com.example.notes_app_in_kotlin.helper.Global
+import com.example.notes_app_in_kotlin.helper.NetworkUtilities
 import com.example.notes_app_in_kotlin.register.RegisterActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityLoginBinding
     private lateinit var  view : View
     private var isUserLoggedIn : Boolean = false
+    private lateinit var auth : FirebaseAuth
+    private lateinit var database : FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
     private fun initializeFields() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
         view= binding.root
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
     }
 
     private fun onClickListener() {
@@ -39,8 +46,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnSignIn.setOnClickListener {
             if( validations() ) {
 
-                    val i = Intent(this, MainActivity::class.java)
-                    startActivity(i)
+                     if(NetworkUtilities.getConnectivityStatus(this)){
+                         val i = Intent(this, MainActivity::class.java)
+                         startActivity(i)
+                     }
+
                 }
                 else{
                     Global.showSnackBar(view,resources.getString(R.string.no_internet))
