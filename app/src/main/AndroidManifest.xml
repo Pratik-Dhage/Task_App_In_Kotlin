@@ -17,12 +17,7 @@
         android:theme="@style/splashTheme"
         tools:targetApi="31">
         <activity
-            android:name=".register.RegisterActivity"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".login.LoginActivity"
+            android:name=".splash.SplashActivity"
             android:exported="true">
 
             <intent-filter>
@@ -30,6 +25,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".register.RegisterActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="true">
 
         </activity>
         <activity
