@@ -77,5 +77,10 @@ class MainActivity : AppCompatActivity() {
 
 }
 
+    override fun onBackPressed() {
+        // super.onBackPressed() // onBackPressed button disabled
+    }
+
+
 }
 
