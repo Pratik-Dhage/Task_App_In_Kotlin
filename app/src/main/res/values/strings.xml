@@ -28,8 +28,10 @@
     <string name="age">Age</string>
     <string name="dob">Date of Birth</string>
     <string name="fullname_error">Enter Proper Full Name</string>
+    <string name="email_empty">Email cannot be empty</string>
     <string name="email_error">Enter Proper Email</string>
-    <string name="password_error">Enter Proper Password</string>
+    <string name="password_empty">Password cannot be empty</string>
+    <string name="password_error">Enter Proper Password(min. 6 characters)</string>
     <string name="age_error">Enter Proper Age</string>
     <string name="dob_error">Enter Proper Date of Birth</string>
     <string name="something_went_wrong_error"> Oops! Something Went Wrong</string>

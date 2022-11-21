@@ -3,7 +3,10 @@ package com.example.notes_app_in_kotlin
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.notes_app_in_kotlin.adapter.UsersAdapter
 import com.example.notes_app_in_kotlin.databinding.ActivityMainBinding
 import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
@@ -21,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var isUserLoggedIn : Boolean = false
     private lateinit var auth : FirebaseAuth
     private lateinit var database : DatabaseReference
-    var list: ArrayList<Users> = ArrayList<Users>()
+    var list: ArrayList<Users> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         initializeFields()
       //  onClickListener()
         initObserver()
+        setUpRecyclerViewData()
     }
+
+
 
     private fun initializeFields() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
@@ -42,6 +48,14 @@ class MainActivity : AppCompatActivity() {
         TODO("Not yet implemented")
     }*/
 
+    private fun setUpRecyclerViewData() {
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvMain.isVisible = true
+        binding.rvMain.layoutManager = layoutManager
+        binding.rvMain.adapter = UsersAdapter()
+
+    }
+
     private fun initObserver() {
 
         if(NetworkUtilities.getConnectivityStatus(this)) {
@@ -52,10 +66,11 @@ class MainActivity : AppCompatActivity() {
               val dob = binding.txtUserDateOfBirth.text.toString()
 
 
+
+            //Other Users
+//            database.child("Users").get().result.value
+
            }
-
-
-
         else{
             Global.showSnackBar(view,resources.getString(R.string.no_internet))
         }

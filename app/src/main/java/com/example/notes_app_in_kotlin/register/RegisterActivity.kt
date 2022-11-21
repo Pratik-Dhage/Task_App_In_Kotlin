@@ -48,14 +48,17 @@ class RegisterActivity : AppCompatActivity() {
             if(validations()) {
 
                   if(NetworkUtilities.getConnectivityStatus(this)){
+
                       val i = Intent(this, MainActivity::class.java)
                       i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                       startActivity(i)
                   }
+
+                  else{
+                      Global.showSnackBar(view,resources.getString(R.string.no_internet))
+                  }
             }
-                else{
-                    Global.showSnackBar(view,resources.getString(R.string.no_internet))
-                }
+
 
             }
         }
@@ -74,21 +77,34 @@ class RegisterActivity : AppCompatActivity() {
             Global.showSnackBar(view,resources.getString(R.string.fullname_error))
             return false
         }
+
         if (email.isEmpty() ){
+            Global.showSnackBar(view,resources.getString(R.string.email_empty))
+            return false
+        }
+
+        if (!Global.isValidEmail(email) ){
             Global.showSnackBar(view,resources.getString(R.string.email_error))
             return false
         }
+
         if (password.isEmpty()){
+            Global.showSnackBar(view,resources.getString(R.string.password_empty))
+            return false
+        }
+
+        if (password.length<6){
             Global.showSnackBar(view,resources.getString(R.string.password_error))
             return false
         }
-        if (age.isEmpty()){
+
+        if (age.isEmpty() || age=="0"){
             Global.showSnackBar(view,resources.getString(R.string.age_error))
             return false
         }
 
         if(dob.isEmpty()){
-            Global.showSnackBar(view,resources.getString(R.string.age_error))
+            Global.showSnackBar(view,resources.getString(R.string.dob_error))
             return false
         }
 
@@ -98,25 +114,20 @@ class RegisterActivity : AppCompatActivity() {
 
                 // create User in Firebase
                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
-                    if(it.isSuccessful){
+                    if(it.isSuccessful && it.isComplete){
 
                        val users : Users = Users(fullName,email,password,age,dob)
 
                        val id: String = it.result.user?.uid ?: ""
                         // save data in RealTime Database
-                        database.child("Users").child(id).setValue(users).addOnSuccessListener {
+                        database.child(id).setValue(users)
 
-                            Global.showSnackBar(view,resources.getString(R.string.user_added_successfully))
+                        Global.showToast(this,resources.getString(R.string.user_added_successfully))
 
-                         // clear all fields
-                            clearFields()
-                        }.addOnFailureListener{
-                            Global.showSnackBar(view,resources.getString(R.string.something_went_wrong_error))
-                        }
                     }
-
                     else{
                         Global.showSnackBar(view, it.exception?.localizedMessage?.toString() ?: "")
+                        println(("Here:" + it.exception?.localizedMessage?.toString()) ?: "")
                     }
                 }
 
@@ -126,15 +137,6 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             return true }
-    }
-
-    private fun clearFields(){
-        binding.edtFullName.text?.clear()
-        binding.edtEmail.text?.clear()
-        binding.edtPass.text?.clear()
-        binding.edtAge.text?.clear()
-        binding.edtDob.text?.clear()
-
     }
 
     override fun onBackPressed() {

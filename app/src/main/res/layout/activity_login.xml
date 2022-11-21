@@ -60,6 +60,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:background="@drawable/bg_edt_password"
                     android:hint="@string/password"
+                    android:maxLength="6"
                     android:inputType="textPassword"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

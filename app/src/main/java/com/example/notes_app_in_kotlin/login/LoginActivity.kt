@@ -51,10 +51,12 @@ class LoginActivity : AppCompatActivity() {
                          val i = Intent(this, MainActivity::class.java)
                          startActivity(i)
                      }
+                     else{
+                         Global.showSnackBar(view,resources.getString(R.string.no_internet))
+                     }
+
                 }
-                else{
-                    Global.showSnackBar(view,resources.getString(R.string.no_internet))
-                }
+
             }
 
         }
@@ -64,12 +66,22 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.edtEmail.text.toString().trim()
         val password = binding.edtPass.text.toString().trim()
 
-        if (email.isEmpty()  ){
+        if (email.isEmpty() ){
+            Global.showSnackBar(view,resources.getString(R.string.email_empty))
+            return false
+        }
+
+        if (!Global.isValidEmail(email) ){
             Global.showSnackBar(view,resources.getString(R.string.email_error))
             return false
         }
 
         if (password.isEmpty()){
+            Global.showSnackBar(view,resources.getString(R.string.password_empty))
+            return false
+        }
+
+        if (password.length<6){
             Global.showSnackBar(view,resources.getString(R.string.password_error))
             return false
         }

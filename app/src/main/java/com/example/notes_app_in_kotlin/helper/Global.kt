@@ -25,9 +25,12 @@ object Global {
         snackBar.show()
     }
 
-    fun isValidEmail(target: String): Boolean =
-        !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
+    /*fun isValidEmail(target: String): Boolean =
+        !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()*/
 
+     fun isValidEmail(email: String): Boolean {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
 
    /* fun saveStringInSharedPref(context: Context, key: String, value: String) {
         SharedPreferenceHelper.writeString(context, key, value)
