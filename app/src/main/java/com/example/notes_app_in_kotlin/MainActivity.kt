@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initializeFields()
-        onClickListener()
+      //  onClickListener()
         initObserver()
     }
 
@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("Users")
     }
 
-    private fun onClickListener() {
+  /*  private fun onClickListener() {
         TODO("Not yet implemented")
-    }
+    }*/
 
     private fun initObserver() {
 
