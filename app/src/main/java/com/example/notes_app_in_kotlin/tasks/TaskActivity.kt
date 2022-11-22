@@ -44,6 +44,22 @@ class TaskActivity : AppCompatActivity() {
     private fun initObserver() {
         if(NetworkUtilities.getConnectivityStatus(this)) {
 
+            val id = intent.getStringExtra("id")
+            val randomKey = intent.getStringExtra("randomKey")
+
+            //Retrieve data from Firebase Database
+            if (id != null) {
+                if (randomKey != null) {
+                    database.child(id).child("tasks").child(randomKey).get().addOnSuccessListener {
+                        if(it.exists()){
+
+                            val t = it.child("task")
+
+                        }
+                    }
+                }
+            }
+
 
         }
         else{

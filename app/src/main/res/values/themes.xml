@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Notes_App_In_Kotlin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Notes_App_In_Kotlin" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/button_bg_color</item>
         <item name="colorPrimaryVariant">@color/button_bg_color</item>

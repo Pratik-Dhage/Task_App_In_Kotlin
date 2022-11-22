@@ -14,16 +14,16 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
 
     var list: ArrayList<Tasks> =ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
         val view : LvItemTaskBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.lv_item_task,parent,false)
 
-        return TaskAdapter.MyViewHolder(view)
+        return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TaskAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val a = list.get(position)
 

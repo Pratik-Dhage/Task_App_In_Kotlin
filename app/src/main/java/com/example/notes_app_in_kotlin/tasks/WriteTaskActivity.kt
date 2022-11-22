@@ -1,9 +1,11 @@
 package com.example.notes_app_in_kotlin.tasks
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import com.example.notes_app_in_kotlin.MainActivity
 import com.example.notes_app_in_kotlin.R
 import com.example.notes_app_in_kotlin.databinding.ActivityTaskBinding
 import com.example.notes_app_in_kotlin.databinding.ActivityWriteTaskBinding
@@ -49,6 +51,11 @@ class WriteTaskActivity : AppCompatActivity() {
                        Global.showSnackBar(view,resources.getString(R.string.task_added_successfully))
                        Global.hideKeyboard(view)
                        binding.edtTask.text.clear()
+
+                       //pass randomKey to MainActivity and then from MainActivity to TaskActivity
+                       val i = Intent(this, MainActivity::class.java)
+                       i.putExtra("randomKey",randomKey)
+                       startActivity(i)
                    }
                }
                  }

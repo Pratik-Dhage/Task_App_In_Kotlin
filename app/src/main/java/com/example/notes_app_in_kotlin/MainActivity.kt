@@ -16,6 +16,7 @@ import com.example.notes_app_in_kotlin.databinding.ActivityMainBinding
 import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
 import com.example.notes_app_in_kotlin.register.Users
+import com.example.notes_app_in_kotlin.tasks.TaskActivity
 import com.example.notes_app_in_kotlin.tasks.WriteTaskActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onClickListener() {
 
+        //SwitcherView
         binding.switcherView.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
@@ -49,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Floating Action Button
         binding.floatingButton.setOnClickListener {
 
             val id = intent.getStringExtra("id")
@@ -65,6 +68,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //CurrentUser(Green) click
+        binding.userCardView.setOnClickListener {
+
+            val randomKey = intent.getStringExtra("randomKey")
+            if(NetworkUtilities.getConnectivityStatus(this)){
+
+                if (randomKey != null) {
+                    val i = Intent(this,TaskActivity::class.java)
+                    i.putExtra("randomKey",randomKey)
+                    startActivity(i)
+                }
+            }
+            else{
+                Global.showSnackBar(view, resources.getString(R.string.no_internet))
+            }
+        }
     }
 
 
@@ -138,8 +157,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             //Other Users
-
-            val otherUsers = database.child("Users")
+              val currentUserKey = intent.getStringExtra("currentUserKey")
+            val otherUsers = database.child(currentUserKey?:"")
 
             //Add Value Event Listener will load everytime when data changes
             //Add Listener For Single value will load once
@@ -155,7 +174,7 @@ class MainActivity : AppCompatActivity() {
 
                         // this condition will not Allow Current Logged In User to Show in MainActivity's RecyclerView
                         // Rest all other Users using this App will be Displayed
-                        if (!users?.name.equals(FirebaseAuth.getInstance().currentUser?.displayName)) {
+                        if (!currentUserKey.equals(FirebaseAuth.getInstance().uid)) {
                             list.add(users!!)
                         }
                     }

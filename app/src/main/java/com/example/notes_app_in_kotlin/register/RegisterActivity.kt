@@ -117,9 +117,11 @@ class RegisterActivity : AppCompatActivity() {
 
                        val users : Users = Users(fullName,email,password,age,dob)
 
-                       val id: String = it.result.user?.uid ?: "" //for passing in MainActivity
+                       val id: String = it.result.user?.uid ?: "" //currentUserKey for passing in MainActivity
                         // save data in RealTime Database
                         database.child(id).setValue(users)
+
+                      val  currentUserKey = id // pass in MainActivity
 
                         Global.showToast(this,resources.getString(R.string.user_added_successfully))
 
@@ -128,6 +130,7 @@ class RegisterActivity : AppCompatActivity() {
                         i.putExtra("fullName",fullName)
                         i.putExtra("age",age)
                         i.putExtra("dob",dob)
+                        i.putExtra("currentUserKey",currentUserKey)
 
                         startActivity(i)
 
