@@ -7,6 +7,20 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+        <TextView
+            android:id="@+id/txtSignOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/signout"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:textSize="@dimen/title_text_size"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            />
+
         <!--Swither-->
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switcherView"

@@ -124,9 +124,12 @@ class RegisterActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
                     if(it.isSuccessful && it.isComplete){
 
-                       val users : Users = Users(fullName,email,password,age,dob)
 
-                       val id: String = it.result.user?.uid ?: "" //currentUserKey for passing in MainActivity
+                        val id: String = it.result.user?.uid ?: "" //currentUserKey for passing in MainActivity
+
+                       val users : Users = Users(id,fullName,email,password,age,dob)
+
+
                         // save data in RealTime Database
                         database.child(id).setValue(users)
 
@@ -141,7 +144,7 @@ class RegisterActivity : AppCompatActivity() {
                         i.putExtra("dob",dob)
                         i.putExtra("currentUserKey",currentUserKey)
 
-                        //save user data in SharedPreferences
+                        //save user data from Register in SharedPreferences
                         Global.saveStringInSharedPref(this,"fullName",fullName)
                         Global.saveStringInSharedPref(this,"age",age)
                         Global.saveStringInSharedPref(this,"dob",dob)

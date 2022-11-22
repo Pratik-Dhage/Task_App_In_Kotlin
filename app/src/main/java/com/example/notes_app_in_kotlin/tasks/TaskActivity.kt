@@ -12,9 +12,9 @@ import com.example.notes_app_in_kotlin.adapter.UsersAdapter
 import com.example.notes_app_in_kotlin.databinding.ActivityTaskBinding
 import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
+import com.example.notes_app_in_kotlin.register.Users
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class TaskActivity : AppCompatActivity() {
 
@@ -50,13 +50,26 @@ class TaskActivity : AppCompatActivity() {
             //Retrieve data from Firebase Database
             if (id != null) {
                 if (randomKey != null) {
-                    database.child(id).child("tasks").child(randomKey).get().addOnSuccessListener {
-                        if(it.exists()){
+                    database.child(id).child("tasks").child(randomKey).addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                           list.clear()
 
-                            val t = it.child("task")
+                            for (dataSnapshot in snapshot.children) {
+                                val tasks = dataSnapshot.getValue(Tasks::class.java) // Users Class
+                                // users.setUserId(dataSnapshot.key)
+
+
+                                    list.add(tasks!!)
+
+                            }
 
                         }
-                    }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
                 }
             }
 

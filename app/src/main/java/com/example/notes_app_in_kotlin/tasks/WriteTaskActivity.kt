@@ -48,7 +48,7 @@ class WriteTaskActivity : AppCompatActivity() {
                    if (randomKey != null) {
                        database.child(id).child("tasks").child(randomKey).setValue(task)
 
-                       Global.showSnackBar(view,resources.getString(R.string.task_added_successfully))
+                       Global.showToast(this,resources.getString(R.string.task_added_successfully))
                        Global.hideKeyboard(view)
                        binding.edtTask.text.clear()
 

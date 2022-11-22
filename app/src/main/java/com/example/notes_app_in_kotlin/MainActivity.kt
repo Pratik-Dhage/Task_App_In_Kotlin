@@ -16,6 +16,7 @@ import com.example.notes_app_in_kotlin.databinding.ActivityMainBinding
 import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
 import com.example.notes_app_in_kotlin.helper.SharedPreferencesHelper
+import com.example.notes_app_in_kotlin.login.LoginActivity
 import com.example.notes_app_in_kotlin.register.Users
 import com.example.notes_app_in_kotlin.tasks.TaskActivity
 import com.example.notes_app_in_kotlin.tasks.WriteTaskActivity
@@ -42,6 +43,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onClickListener() {
+
+        binding.txtSignOut.setOnClickListener {
+            SharedPreferencesHelper.clearSharedPreferences()
+            val i = Intent(this,LoginActivity::class.java)
+            startActivity(i)
+        }
 
         //SwitcherView
         binding.switcherView.setOnCheckedChangeListener { _, isChecked ->
@@ -146,6 +153,11 @@ class MainActivity : AppCompatActivity() {
                             val dob = it.child("dob").value
                             binding.txtUserDateOfBirth.text = dob.toString()
 
+                            //save user data from Login in SharedPreferences
+                            Global.saveStringInSharedPref(this,"fullName",fullName.toString())
+                            Global.saveStringInSharedPref(this,"age",age.toString())
+                            Global.saveStringInSharedPref(this,"dob",dob.toString())
+
                         }
                     }.addOnFailureListener {
                         Global.showSnackBar(view, resources.getString(R.string.user_not_exist))
@@ -163,7 +175,7 @@ class MainActivity : AppCompatActivity() {
 
             //Add Value Event Listener will load everytime when data changes
             //Add Listener For Single value will load once
-            otherUsers.addValueEventListener(object : ValueEventListener {
+          /*  otherUsers.addValueEventListener(object : ValueEventListener {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -172,10 +184,11 @@ class MainActivity : AppCompatActivity() {
                     for (dataSnapshot in snapshot.children) {
                         val users = dataSnapshot.getValue(Users::class.java) // Users Class
                         // users.setUserId(dataSnapshot.key)
+                        users?.id = dataSnapshot.key.toString()
 
                         // this condition will not Allow Current Logged In User to Show in MainActivity's RecyclerView
                         // Rest all other Users using this App will be Displayed
-                        if (!currentUserKey.equals(FirebaseAuth.getInstance().uid)) {
+                        if (!users?.id.equals(FirebaseAuth.getInstance().uid)) {
                             list.add(users!!)
                         }
                     }
@@ -189,7 +202,7 @@ class MainActivity : AppCompatActivity() {
                     Global.showSnackBar(view, error.message.toString())
                 }
 
-            })
+            })*/
 
         } else {
             Global.showSnackBar(view, resources.getString(R.string.no_internet))
@@ -197,11 +210,14 @@ class MainActivity : AppCompatActivity() {
 
         getAllUserData() // to get all user data
 
+
     }
 
     override fun onBackPressed() {
         // super.onBackPressed() // onBackPressed button disabled
     }
+
+
 
     private fun getAllUserData(){
 
@@ -210,6 +226,8 @@ class MainActivity : AppCompatActivity() {
         binding.txtUserDateOfBirth.text = Global.getStringFromSharedPref(this,"dob")
 
     }
+
+
 
 
 }
