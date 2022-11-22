@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import android.util.TypedValue
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.material.snackbar.Snackbar
@@ -30,6 +31,12 @@ object Global {
 
      fun isValidEmail(email: String): Boolean {
         return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    fun hideKeyboard(view : View) {
+        val inputManager =
+            view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
    /* fun saveStringInSharedPref(context: Context, key: String, value: String) {

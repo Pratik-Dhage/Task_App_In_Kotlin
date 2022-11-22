@@ -21,9 +21,21 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:background="@color/light_red"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/light_red">
 
+                <TextView
+                    android:id="@+id/labelName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:ellipsize="end"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_text_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Name" />
 
                 <TextView
                     android:id="@+id/txtName"
@@ -31,14 +43,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:ellipsize="end"
-                    android:paddingTop="@dimen/_2sdp"
                     android:maxLines="2"
                     android:minLines="1"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:text="@string/label_name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/title_text_size"
+                    app:layout_constraintStart_toEndOf="@id/labelName"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/labelAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:minLines="1"
+                    android:text="@string/label_age"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_text_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Name" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
 
                 <TextView
                     android:id="@+id/txtAge"
@@ -49,9 +75,25 @@
                     android:minLines="1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/subtitle_text_size"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/labelAge"
                     app:layout_constraintTop_toBottomOf="@+id/txtName"
                     tools:text="Age" />
+
+                <TextView
+                    android:id="@+id/labelDob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:ellipsize="end"
+                    android:minLines="1"
+                    android:paddingBottom="@dimen/_2sdp"
+                    android:text="@string/label_dob"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_text_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtAge" />
+
 
                 <TextView
                     android:id="@+id/txtDateOfBirth"
@@ -59,12 +101,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:paddingBottom="@dimen/_2sdp"
                     android:ellipsize="end"
                     android:minLines="1"
+                    android:paddingBottom="@dimen/_2sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/subtitle_text_size"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/labelDob"
                     app:layout_constraintTop_toBottomOf="@+id/txtAge"
                     tools:text="Date of Birth" />
 

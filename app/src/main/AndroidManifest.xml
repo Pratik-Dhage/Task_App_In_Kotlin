@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Notes_App_In_Kotlin"
         tools:targetApi="31">
         <activity
+            android:name=".tasks.WriteTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".tasks.TaskActivity"
             android:exported="false" />
         <activity
@@ -30,13 +33,13 @@
         </activity>
         <activity
             android:name=".register.RegisterActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".login.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

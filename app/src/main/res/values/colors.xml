@@ -6,7 +6,9 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="custom_black">#676363</color>
     <color name="white">#FFFFFFFF</color>
+
 
     <!--app colors-->
     <color name="app_bg_color">#757AE6</color>
@@ -15,7 +17,7 @@
     <color name="editText_bg_color">#B0B1E2</color>
     <color name="editText_bg_color2">#CBCBFE</color>
     <color name="editText_bg_color3">#A7B6CD</color>
-
+    <color name="light_green">#B3FB5E</color>
 
     <color name="app_color_white">#FFFFFFFF</color>
     <color name="app_color_grey">#2A8A8484</color>
@@ -25,6 +27,7 @@
     <color name="btn_bg_color1">#FFFFFFFF</color>
     <color name="btn_bg_color2">#FFFFFFFF</color>
     <color name="light_blue">#B1DBF3</color>
+    <color name="blue">#3194CD</color>
     <color name="light_red">#FAD3D1</color>
 
 

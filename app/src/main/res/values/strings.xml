@@ -37,8 +37,18 @@
     <string name="something_went_wrong_error"> Oops! Something Went Wrong</string>
     <string name="home">Home</string>
     <string name="user_added_successfully">User Added Successfully</string>
-    <string name="ready_to_add_tasks">Your App is Ready</string>
-    <string name="login_successful">login Successful</string>
+    <string name="task_added_successfully">Task Added Successfully</string>
+    <string name="Loading">Loading…</string>
+    <string name="login_successful">Login Successful</string>
+    <string name="checking_credentials">Checking Credentials</string>
+    <string name="user_not_exist">User Does Not Exist</string>
+    <string name="label_name">Name:</string>
+    <string name="label_age">Age:</string>
+    <string name="label_dob">Dob:</string>
+    <string name="light">Light</string>
+    <string name="mode">Mode</string>
+    <string name="write_your_task_here">Write Your Task Here</string>
+    <string name="add">Add</string>
 
 
 </resources>

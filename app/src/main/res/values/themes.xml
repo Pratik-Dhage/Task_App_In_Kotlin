@@ -15,9 +15,9 @@
     </style>
 
     <!--Custom theme-->
-    <style name="splashTheme" parent="Theme.Notes_App_In_Kotlin">
-    <item name="android:windowBackground" type="drawable">@drawable/splash_screen</item>
-        <item name="android:statusBarColor" type="color">@color/white</item>
-
+    <style name="DarkTheme" parent="Theme.Notes_App_In_Kotlin">
+    <item name="android:windowBackground" type="drawable">@color/custom_black</item>
+        <item name="android:statusBarColor" type="color">@color/custom_black</item>
     </style>
+
 </resources>

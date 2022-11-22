@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
 
                   if(NetworkUtilities.getConnectivityStatus(this)){
 
-                      Global.showSnackBar(view,resources.getString(R.string.ready_to_add_tasks))
+                      Global.showSnackBar(view,resources.getString(R.string.Loading))
                   }
 
                   else{
@@ -117,7 +117,7 @@ class RegisterActivity : AppCompatActivity() {
 
                        val users : Users = Users(fullName,email,password,age,dob)
 
-                       val id: String = it.result.user?.uid ?: ""
+                       val id: String = it.result.user?.uid ?: "" //for passing in MainActivity
                         // save data in RealTime Database
                         database.child(id).setValue(users)
 
