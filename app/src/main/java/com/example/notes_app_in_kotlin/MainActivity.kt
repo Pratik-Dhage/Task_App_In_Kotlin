@@ -1,7 +1,9 @@
 package com.example.notes_app_in_kotlin
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -79,6 +81,12 @@ class MainActivity : AppCompatActivity() {
         //CurrentUser(Green) click
         binding.clCurrentUser.setOnClickListener {
 
+            val id = intent.getStringExtra("id")
+            val j = Intent(this,TaskActivity::class.java)
+            j.putExtra("id",id)
+            startActivity(j)
+
+            //coming from Write Task Activity
             val randomKey = intent.getStringExtra("randomKey")
             if(NetworkUtilities.getConnectivityStatus(this)){
 
@@ -204,6 +212,8 @@ class MainActivity : AppCompatActivity() {
 
             })*/
 
+
+
         } else {
             Global.showSnackBar(view, resources.getString(R.string.no_internet))
         }
@@ -218,6 +228,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+    private fun getAppInstalledUsers(context: Context, packageName: String): Boolean {
+        return try {
+            context.packageManager.getApplicationInfo(packageName, 0)
+
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+            false
+        }
+    }
 
     private fun getAllUserData(){
 

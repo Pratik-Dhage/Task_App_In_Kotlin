@@ -147,16 +147,15 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="@dimen/_35sdp"
             android:id="@+id/floatingButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/add_task"
             app:rippleColor="@color/blue"
-            android:layout_marginBottom="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_height="@dimen/_25sdp"
-            app:fabCustomSize="@dimen/_25sdp"
+            app:layout_constraintBottom_toTopOf="@id/bottomNav"
+            android:layout_height="@dimen/_35sdp"
+            app:fabCustomSize="@dimen/_35sdp"
             android:contentDescription="@string/floatingButton" />
 
 
@@ -172,6 +171,15 @@
             app:layout_constraintTop_toBottomOf="@+id/userCardView"
             tools:itemCount="3"
             tools:listitem="@layout/lv_item_users" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:id="@+id/bottomNav"
+            app:menu="@menu/bottom_nav_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="@dimen/_50sdp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -54,6 +54,7 @@
     <string name="signout">SignOut</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
+    <string name="account">Account</string>
 
 
 </resources>

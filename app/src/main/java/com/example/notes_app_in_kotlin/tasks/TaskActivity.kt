@@ -1,5 +1,6 @@
 package com.example.notes_app_in_kotlin.tasks
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -44,6 +45,8 @@ class TaskActivity : AppCompatActivity() {
     private fun initObserver() {
         if(NetworkUtilities.getConnectivityStatus(this)) {
 
+            getUserTask()
+
             val id = intent.getStringExtra("id")
             val randomKey = intent.getStringExtra("randomKey")
 
@@ -81,9 +84,40 @@ class TaskActivity : AppCompatActivity() {
     }
 
     private fun initializeFields() {
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_task)
         view= binding.root
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
+    }
+
+    private fun getUserTask(){
+
+        val id  = intent.getStringExtra("id")
+        if (id != null) {
+            database.child(id).child("name").addValueEventListener(object : ValueEventListener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
+
+                    for (dataSnapshot in snapshot.children) {
+                        val tasks = dataSnapshot.getValue(Tasks::class.java) // Users Class
+                        // users.setUserId(dataSnapshot.key)
+                        tasks?.id = dataSnapshot.key.toString()
+
+
+                        list.add(tasks!!)
+
+                    }
+                    val adapter : TaskAdapter = TaskAdapter()
+                     adapter.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
+
     }
 }
