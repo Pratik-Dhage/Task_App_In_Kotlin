@@ -3,6 +3,8 @@ package com.example.notes_app_in_kotlin.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.example.notes_app_in_kotlin.MainActivity
@@ -42,6 +44,13 @@ class LoginActivity : AppCompatActivity() {
         binding.txtSignUp.setOnClickListener {
             val i = Intent(this, RegisterActivity::class.java)
             startActivity(i)
+        }
+
+        binding.ivEye.setOnCheckedChangeListener {_,p->
+            if (p) binding.edtPass.transformationMethod =
+                PasswordTransformationMethod.getInstance()
+            else binding.edtPass.transformationMethod =
+                HideReturnsTransformationMethod.getInstance()
         }
 
         binding.btnSignIn.setOnClickListener {

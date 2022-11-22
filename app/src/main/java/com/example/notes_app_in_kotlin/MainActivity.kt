@@ -15,6 +15,7 @@ import com.example.notes_app_in_kotlin.adapter.UsersAdapter
 import com.example.notes_app_in_kotlin.databinding.ActivityMainBinding
 import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
+import com.example.notes_app_in_kotlin.helper.SharedPreferencesHelper
 import com.example.notes_app_in_kotlin.register.Users
 import com.example.notes_app_in_kotlin.tasks.TaskActivity
 import com.example.notes_app_in_kotlin.tasks.WriteTaskActivity
@@ -194,10 +195,20 @@ class MainActivity : AppCompatActivity() {
             Global.showSnackBar(view, resources.getString(R.string.no_internet))
         }
 
+        getAllUserData() // to get all user data
+
     }
 
     override fun onBackPressed() {
         // super.onBackPressed() // onBackPressed button disabled
+    }
+
+    private fun getAllUserData(){
+
+        binding.txtUserName.text = Global.getStringFromSharedPref(this,"fullName")
+        binding.txtUserAge.text = Global.getStringFromSharedPref(this,"age")
+        binding.txtUserDateOfBirth.text = Global.getStringFromSharedPref(this,"dob")
+
     }
 
 

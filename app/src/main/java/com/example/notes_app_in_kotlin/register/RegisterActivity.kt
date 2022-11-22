@@ -3,6 +3,8 @@ package com.example.notes_app_in_kotlin.register
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -43,6 +45,13 @@ class RegisterActivity : AppCompatActivity() {
             val i = Intent(this, LoginActivity::class.java)
             i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(i)
+        }
+
+        binding.ivEye.setOnCheckedChangeListener {_,p->
+            if (p) binding.edtPass.transformationMethod =
+                PasswordTransformationMethod.getInstance()
+            else binding.edtPass.transformationMethod =
+                HideReturnsTransformationMethod.getInstance()
         }
 
         binding.btnSignUp.setOnClickListener {
@@ -131,6 +140,12 @@ class RegisterActivity : AppCompatActivity() {
                         i.putExtra("age",age)
                         i.putExtra("dob",dob)
                         i.putExtra("currentUserKey",currentUserKey)
+
+                        //save user data in SharedPreferences
+                        Global.saveStringInSharedPref(this,"fullName",fullName)
+                        Global.saveStringInSharedPref(this,"age",age)
+                        Global.saveStringInSharedPref(this,"dob",dob)
+                        Global.saveStringInSharedPref(this,"currentUserKey",currentUserKey)
 
                         startActivity(i)
 

@@ -73,4 +73,11 @@ class WriteTaskActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        val i = Intent(this,MainActivity::class.java)
+        startActivity(i)
+    }
 }

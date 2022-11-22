@@ -39,17 +39,16 @@ object Global {
         inputManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-   /* fun saveStringInSharedPref(context: Context, key: String, value: String) {
-        SharedPreferenceHelper.writeString(context, key, value)
+    fun saveStringInSharedPref(context: Context, key: String, value: String) {
+        SharedPreferencesHelper.writeString(context, key, value)
     }
 
     fun getStringFromSharedPref(context: Context, key: String): String {
-        return SharedPreferenceHelper.getString(context, key, "") ?: ""
+        return SharedPreferencesHelper.getString(context, key, "") ?: ""
     }
 
     fun removeStringInSharedPref(context: Context, key: String) {
-        SharedPreferenceHelper.writeString(context, key, "")
+        SharedPreferencesHelper.writeString(context, key, "")
     }
-*/
 
 }
