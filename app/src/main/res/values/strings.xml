@@ -49,6 +49,7 @@
     <string name="mode">Mode</string>
     <string name="write_your_task_here">Write Your Task Here</string>
     <string name="add">Add</string>
+    <string name="floatingButton">floatingButton</string>
 
 
 </resources>
