@@ -14,6 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!--Custom theme-->
     <style name="splashTheme" parent="Theme.Notes_App_In_Kotlin">
     <item name="android:windowBackground" type="drawable">@drawable/splash_screen</item>
         <item name="android:statusBarColor" type="color">@color/white</item>

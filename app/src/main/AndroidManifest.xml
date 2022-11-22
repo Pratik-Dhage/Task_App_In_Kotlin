@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/task_app_icon"
         android:supportsRtl="true"
-        android:theme="@style/splashTheme"
+        android:theme="@style/Theme.Notes_App_In_Kotlin"
         tools:targetApi="31">
         <activity
             android:name=".splash.SplashActivity"

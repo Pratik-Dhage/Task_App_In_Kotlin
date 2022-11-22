@@ -74,5 +74,9 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 
+    //Dependency for Splash Screen
+    implementation 'com.airbnb.android:lottie:5.0.3'
+
+
 
 }
