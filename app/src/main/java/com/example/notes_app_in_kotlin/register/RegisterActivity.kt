@@ -13,6 +13,7 @@ import com.example.notes_app_in_kotlin.R
 import com.example.notes_app_in_kotlin.databinding.ActivityRegisterBinding
 import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
+import com.example.notes_app_in_kotlin.helper.OnClickDate
 import com.example.notes_app_in_kotlin.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -45,6 +46,23 @@ class RegisterActivity : AppCompatActivity() {
             val i = Intent(this, LoginActivity::class.java)
             i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(i)
+        }
+
+        binding.edtDob.setOnClickListener {
+
+            Global.hideKeyboard(view)
+
+            Global.showDatePicker(this, object : OnClickDate {
+                override fun onClick(strDate: String) {
+                    binding.edtDob.setText(
+                        Global.getFormattedDate(
+                            "yyyy-MM-dd",
+                            "dd-MM-yyyy",
+                            strDate
+                        )
+                    )
+                }
+            }, "DOB")
         }
 
         binding.ivEye.setOnCheckedChangeListener {_,p->

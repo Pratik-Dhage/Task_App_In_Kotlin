@@ -35,4 +35,11 @@
         <item name="android:textSize">@dimen/subtitle_text_size</item>
     </style>
 
+    <style name="MyDatePicker" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorControlNormal">@color/app_color_grey</item>
+        <item name="colorControlActivated">@color/app_bg_color</item>
+        <item name="android:textColorPrimary">@color/app_bg_color</item>
+    </style>
+
+
 </resources>

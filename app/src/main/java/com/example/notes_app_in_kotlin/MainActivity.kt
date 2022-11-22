@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //CurrentUser(Green) click
-        binding.userCardView.setOnClickListener {
+        binding.clCurrentUser.setOnClickListener {
 
             val randomKey = intent.getStringExtra("randomKey")
             if(NetworkUtilities.getConnectivityStatus(this)){

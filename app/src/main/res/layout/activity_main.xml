@@ -50,6 +50,7 @@
             app:layout_constraintTop_toBottomOf="@id/switcherView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clCurrentUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/app_color_current_user">
