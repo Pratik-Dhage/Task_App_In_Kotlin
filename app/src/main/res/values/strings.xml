@@ -37,6 +37,8 @@
     <string name="something_went_wrong_error"> Oops! Something Went Wrong</string>
     <string name="home">Home</string>
     <string name="user_added_successfully">User Added Successfully</string>
+    <string name="ready_to_add_tasks">Your App is Ready</string>
+    <string name="login_successful">login Successful</string>
 
 
 </resources>

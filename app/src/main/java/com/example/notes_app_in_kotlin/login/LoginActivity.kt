@@ -48,8 +48,8 @@ class LoginActivity : AppCompatActivity() {
             if( validations() ) {
 
                      if(NetworkUtilities.getConnectivityStatus(this)){
-                         val i = Intent(this, MainActivity::class.java)
-                         startActivity(i)
+
+                         Global.showSnackBar(view,resources.getString(R.string.login_successful))
                      }
                      else{
                          Global.showSnackBar(view,resources.getString(R.string.no_internet))
@@ -87,6 +87,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         else
+        {
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
+        }
 
         return true
 

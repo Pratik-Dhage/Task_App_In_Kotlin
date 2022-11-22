@@ -1,5 +1,6 @@
 package com.example.notes_app_in_kotlin
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +13,7 @@ import com.example.notes_app_in_kotlin.helper.Global
 import com.example.notes_app_in_kotlin.helper.NetworkUtilities
 import com.example.notes_app_in_kotlin.register.Users
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 //HOME Activity
 class MainActivity : AppCompatActivity() {
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         initializeFields()
       //  onClickListener()
         initObserver()
-        setUpRecyclerViewData()
+        setUpRecyclerViewOfUsers()
     }
 
 
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         TODO("Not yet implemented")
     }*/
 
-    private fun setUpRecyclerViewData() {
+    private fun setUpRecyclerViewOfUsers() {
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvMain.isVisible = true
         binding.rvMain.layoutManager = layoutManager
@@ -60,17 +59,56 @@ class MainActivity : AppCompatActivity() {
 
         if(NetworkUtilities.getConnectivityStatus(this)) {
 
+            //get current user details
+            if(intent.hasExtra("fullName")){
+                val fullName = intent.getStringExtra("fullName")
+                binding.txtUserName.text = fullName
+            }
 
-              val fullName = binding.txtUserName.text.toString()
-              val age = binding.txtUserAge.text.toString()
-              val dob = binding.txtUserDateOfBirth.text.toString()
+            if(intent.hasExtra("age")){
+                val age = intent.getStringExtra("age")
+                binding.txtUserAge.text = age
+            }
 
-
+            if(intent.hasExtra("dob")){
+                val dob = intent.getStringExtra("dob")
+                 binding.txtUserDateOfBirth.text = dob
+            }
 
             //Other Users
-//            database.child("Users").get().result.value
 
-           }
+        val otherUsers = database.child("Users")
+
+            otherUsers.addListenerForSingleValueEvent(object : ValueEventListener{
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    list.clear() //acts like Refresh
+
+                    for (dataSnapshot in snapshot.children) {
+                        val users = dataSnapshot.getValue(Users::class.java) // Users Class
+                       // users.setUserId(dataSnapshot.key)
+
+                        // this condition will not Allow Current Logged In User to Show in MainActivity's RecyclerView
+                        // Rest all other Users using this App will be Displayed
+                        if (!users?.name.equals(FirebaseAuth.getInstance().currentUser?.displayName)) {
+                            list.add(users!!)
+                        }
+                    }
+
+                    val usersAdapter : UsersAdapter = UsersAdapter()
+                    usersAdapter.notifyDataSetChanged()
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Global.showSnackBar(view,error.message.toString())
+                }
+
+            })
+
+        }
+
         else{
             Global.showSnackBar(view,resources.getString(R.string.no_internet))
         }

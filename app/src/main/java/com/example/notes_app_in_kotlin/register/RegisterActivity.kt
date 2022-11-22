@@ -1,5 +1,6 @@
 package com.example.notes_app_in_kotlin.register
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -49,9 +50,7 @@ class RegisterActivity : AppCompatActivity() {
 
                   if(NetworkUtilities.getConnectivityStatus(this)){
 
-                      val i = Intent(this, MainActivity::class.java)
-                      i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-                      startActivity(i)
+                      Global.showSnackBar(view,resources.getString(R.string.ready_to_add_tasks))
                   }
 
                   else{
@@ -123,6 +122,14 @@ class RegisterActivity : AppCompatActivity() {
                         database.child(id).setValue(users)
 
                         Global.showToast(this,resources.getString(R.string.user_added_successfully))
+
+                        val i = Intent(this, MainActivity::class.java)
+                        i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        i.putExtra("fullName",fullName)
+                        i.putExtra("age",age)
+                        i.putExtra("dob",dob)
+
+                        startActivity(i)
 
                     }
                     else{
