@@ -52,8 +52,8 @@ class WriteTaskActivity : AppCompatActivity() {
                        Global.hideKeyboard(view)
                        binding.edtTask.text.clear()
 
-                       //pass randomKey to MainActivity and then from MainActivity to TaskActivity
-                       val i = Intent(this, MainActivity::class.java)
+                       //pass randomKey  to TaskActivity
+                       val i = Intent(this, TaskActivity::class.java)
                        i.putExtra("randomKey",randomKey)
                        startActivity(i)
                    }
@@ -74,8 +74,13 @@ class WriteTaskActivity : AppCompatActivity() {
                        Global.hideKeyboard(view)
                        binding.edtTask.text.clear()
 
-                       //pass randomKey to MainActivity and then from MainActivity to TaskActivity
+                      /* //pass randomKey to MainActivity and then from MainActivity to TaskActivity
                        val i = Intent(this, MainActivity::class.java)
+                       i.putExtra("randomKey",randomKey)
+                       startActivity(i)*/
+
+                       //pass randomKey  to TaskActivity
+                       val i = Intent(this, TaskActivity::class.java)
                        i.putExtra("randomKey",randomKey)
                        startActivity(i)
                    }

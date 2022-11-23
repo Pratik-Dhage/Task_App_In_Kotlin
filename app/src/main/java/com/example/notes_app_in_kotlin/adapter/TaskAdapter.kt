@@ -10,9 +10,9 @@ import com.example.notes_app_in_kotlin.databinding.LvItemUsersBinding
 import com.example.notes_app_in_kotlin.register.Users
 import com.example.notes_app_in_kotlin.tasks.Tasks
 
-class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
+class TaskAdapter( private var list: ArrayList<Tasks>) : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
 
-    var list: ArrayList<Tasks> =ArrayList()
+   // var list: ArrayList<Tasks> =ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 

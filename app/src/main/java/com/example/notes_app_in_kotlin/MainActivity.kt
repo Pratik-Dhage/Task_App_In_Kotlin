@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         //CurrentUser(Green) click
         binding.clCurrentUser.setOnClickListener {
 
-            val id = intent.getStringExtra("id")
+            val id =Global.getStringFromSharedPref(this,"id")
             val j = Intent(this,TaskActivity::class.java)
             j.putExtra("id",id)
             startActivity(j)

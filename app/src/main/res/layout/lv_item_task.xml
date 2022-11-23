@@ -20,6 +20,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:paddingTop="@dimen/_2sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_2sdp"
                 android:background="@color/app_color_grey"
                 android:layout_height="wrap_content">
 
@@ -31,8 +35,9 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:ellipsize="end"
                     android:paddingTop="@dimen/_2sdp"
+                    android:paddingBottom="@dimen/_2sdp"
                     android:maxLines="4"
-                    android:inputType="textLongMessage|textMultiLine"
+                    android:inputType="textMultiLine"
                     android:minLines="1"
                     android:maxLength="50"
                     android:textColor="@color/black"
@@ -41,7 +46,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Task" />
 
-                <TextView
+              <!--  <TextView
                     android:id="@+id/txtTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,9 +57,9 @@
                     android:textSize="@dimen/subtitle_text_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTask"
-                    tools:text="Time" />
+                    tools:text="Time" />-->
 
-                <TextView
+              <!--  <TextView
                     android:id="@+id/txtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,7 +72,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTime"
                     tools:text="Date of task" />
-
+-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
