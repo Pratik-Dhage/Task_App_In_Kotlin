@@ -163,13 +163,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_300sdp"
             android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@id/floatingButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userCardView"
-            tools:itemCount="3"
+            tools:itemCount="4"
             tools:listitem="@layout/lv_item_users" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

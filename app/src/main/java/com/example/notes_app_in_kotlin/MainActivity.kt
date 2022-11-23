@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.notes_app_in_kotlin.adapter.TaskAdapter
 import com.example.notes_app_in_kotlin.adapter.UsersAdapter
 import com.example.notes_app_in_kotlin.databinding.ActivityMainBinding
 import com.example.notes_app_in_kotlin.helper.Global
@@ -21,6 +23,7 @@ import com.example.notes_app_in_kotlin.helper.SharedPreferencesHelper
 import com.example.notes_app_in_kotlin.login.LoginActivity
 import com.example.notes_app_in_kotlin.register.Users
 import com.example.notes_app_in_kotlin.tasks.TaskActivity
+import com.example.notes_app_in_kotlin.tasks.Tasks
 import com.example.notes_app_in_kotlin.tasks.WriteTaskActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -33,15 +36,16 @@ class MainActivity : AppCompatActivity() {
     private var isNightModeOn: Boolean = false
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
-    var list: ArrayList<Users> = ArrayList()
+    private lateinit var list: ArrayList<Users>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initializeFields()
         onClickListener()
-        initObserver()
         setUpRecyclerViewOfUsers()
+        initObserver()
+
     }
 
     private fun onClickListener() {
@@ -124,6 +128,8 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setUpRecyclerViewOfUsers() {
+
+        list = arrayListOf<Users>()
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvMain.isVisible = true
         binding.rvMain.layoutManager = layoutManager
@@ -188,8 +194,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             //Other Users
-              val currentUserKey = intent.getStringExtra("currentUserKey")
-            val otherUsers = database.child(currentUserKey?:"")
+              val id = intent.getStringExtra("id")
 
             //Add Value Event Listener will load everytime when data changes
             //Add Listener For Single value will load once
@@ -222,6 +227,60 @@ class MainActivity : AppCompatActivity() {
 
             })*/
 
+            if (id != null) {
+                database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+
+                        if(snapshot.exists()){
+
+                            for(idd in snapshot.children){
+
+                                val d = idd.getValue(Users::class.java)
+                                list.add(d!!)
+                            }
+                            binding.rvMain.adapter = UsersAdapter(list)
+                            val recyclerView : RecyclerView = binding.rvMain
+                            recyclerView.adapter = UsersAdapter(list)
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+
+                })
+            }
+
+        else {
+
+            val id = Global.getStringFromSharedPref(this,"id")
+                database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+
+                        if(snapshot.exists()){
+
+                            for(idd in snapshot.children){
+
+                                val d = idd.getValue(Users::class.java)
+                                list.add(d!!)
+                            }
+                            binding.rvMain.adapter = UsersAdapter(list)
+                            val recyclerView : RecyclerView = binding.rvMain
+                            recyclerView.adapter = UsersAdapter(list)
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+
+                })
+
+              }
 
 
         } else {
