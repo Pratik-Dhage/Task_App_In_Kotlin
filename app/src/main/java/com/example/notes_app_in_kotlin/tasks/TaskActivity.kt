@@ -1,12 +1,14 @@
 package com.example.notes_app_in_kotlin.tasks
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.notes_app_in_kotlin.MainActivity
 import com.example.notes_app_in_kotlin.R
 import com.example.notes_app_in_kotlin.adapter.TaskAdapter
 import com.example.notes_app_in_kotlin.adapter.UsersAdapter
@@ -30,8 +32,9 @@ class TaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_task)
 
         initializeFields()
-        initObserver()
         setUpRecyclerViewOfTasks()
+        initObserver()
+
     }
 
     private fun setUpRecyclerViewOfTasks() {
@@ -119,5 +122,12 @@ class TaskActivity : AppCompatActivity() {
             })
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
     }
 }

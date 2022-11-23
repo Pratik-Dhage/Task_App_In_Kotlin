@@ -1,6 +1,5 @@
 package com.example.notes_app_in_kotlin.register
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -77,7 +76,7 @@ class RegisterActivity : AppCompatActivity() {
 
                   if(NetworkUtilities.getConnectivityStatus(this)){
 
-                      Global.showSnackBar(view,resources.getString(R.string.Loading))
+                      Global.showSnackBar(view,resources.getString(R.string.loading))
                   }
 
                   else{

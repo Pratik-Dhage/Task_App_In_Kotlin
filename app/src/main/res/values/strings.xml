@@ -38,7 +38,7 @@
     <string name="home">Home</string>
     <string name="user_added_successfully">User Added Successfully</string>
     <string name="task_added_successfully">Task Added Successfully</string>
-    <string name="Loading">Loading…</string>
+    <string name="loading">Loading…</string>
     <string name="login_successful">Login Successful</string>
     <string name="checking_credentials">Checking Credentials</string>
     <string name="user_not_exist">User Does Not Exist</string>
@@ -55,6 +55,7 @@
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
     <string name="account">Account</string>
+    <string name="tasks">Tasks</string>
 
 
 </resources>
