@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvMain.isVisible = true
         binding.rvMain.layoutManager = layoutManager
-        binding.rvMain.adapter = UsersAdapter()
+        binding.rvMain.adapter = UsersAdapter(list)
 
     }
 

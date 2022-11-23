@@ -35,7 +35,7 @@
                     android:textSize="@dimen/title_text_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Name" />
+                    android:text="@string/label_name" />
 
                 <TextView
                     android:id="@+id/txtName"

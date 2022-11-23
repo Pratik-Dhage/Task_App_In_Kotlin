@@ -1,7 +1,7 @@
 package com.example.notes_app_in_kotlin.register
 
 data class Users(
-    var id : String = "",
+    val id : String = "",
     val name : String ="",
     val email : String="",
     val password : String="",

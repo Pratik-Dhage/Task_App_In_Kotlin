@@ -10,11 +10,7 @@ import com.example.notes_app_in_kotlin.databinding.LvItemUsersBinding
 import com.example.notes_app_in_kotlin.register.Users
 import java.lang.reflect.Array
 
-class UsersAdapter : RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
-
-    var list: ArrayList<Users> =ArrayList()
-    //var list: ArrayList<Users>? =ArrayList()
-
+class UsersAdapter(var list: ArrayList<Users>) : RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersAdapter.MyViewHolder {
