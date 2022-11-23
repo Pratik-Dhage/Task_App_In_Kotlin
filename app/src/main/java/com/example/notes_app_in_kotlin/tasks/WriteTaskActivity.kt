@@ -58,6 +58,30 @@ class WriteTaskActivity : AppCompatActivity() {
                        startActivity(i)
                    }
                }
+               else{
+                   //if id is null from login get id from SharedPref
+                   val id = Global.getStringFromSharedPref(this,"id")
+
+                   //save task in firebase database
+                   val randomKey= database.child(id).child("tasks").push().key // push will create new node with unique key
+
+                   val task = Tasks(currentTask,randomKey?:"")
+
+                   if (randomKey != null) {
+                       database.child(id).child("tasks").child(randomKey).setValue(task)
+
+                       Global.showToast(this,resources.getString(R.string.task_added_successfully))
+                       Global.hideKeyboard(view)
+                       binding.edtTask.text.clear()
+
+                       //pass randomKey to MainActivity and then from MainActivity to TaskActivity
+                       val i = Intent(this, MainActivity::class.java)
+                       i.putExtra("randomKey",randomKey)
+                       startActivity(i)
+                   }
+               }
+
+
                  }
            else{
                Global.showSnackBar(view,resources.getString(R.string.no_internet))

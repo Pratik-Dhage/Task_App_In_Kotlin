@@ -150,7 +150,7 @@ class RegisterActivity : AppCompatActivity() {
                         // save data in RealTime Database
                         database.child(id).setValue(users)
 
-                      val  currentUserKey = id // pass in MainActivity
+                   //   val  currentUserKey = id // pass in MainActivity
 
                         Global.showToast(this,resources.getString(R.string.user_added_successfully))
 
@@ -159,13 +159,13 @@ class RegisterActivity : AppCompatActivity() {
                         i.putExtra("fullName",fullName)
                         i.putExtra("age",age)
                         i.putExtra("dob",dob)
-                        i.putExtra("currentUserKey",currentUserKey)
+                        i.putExtra("id",id)
 
                         //save user data from Register in SharedPreferences
                         Global.saveStringInSharedPref(this,"fullName",fullName)
                         Global.saveStringInSharedPref(this,"age",age)
                         Global.saveStringInSharedPref(this,"dob",dob)
-                        Global.saveStringInSharedPref(this,"currentUserKey",currentUserKey)
+                        Global.saveStringInSharedPref(this,"id",id)
 
                         startActivity(i)
 

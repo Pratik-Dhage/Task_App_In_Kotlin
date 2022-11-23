@@ -48,8 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.txtSignOut.setOnClickListener {
             SharedPreferencesHelper.clearSharedPreferences()
+            Global.removeStringInSharedPref(this,"id")
             val i = Intent(this,LoginActivity::class.java)
             startActivity(i)
+
+            Global.showToast(this,resources.getString(R.string.signout_success))
         }
 
         //SwitcherView
@@ -65,13 +68,20 @@ class MainActivity : AppCompatActivity() {
         binding.floatingButton.setOnClickListener {
 
             val id = intent.getStringExtra("id")
+            val currentUserKey = intent.getStringExtra("currentUserKey")
             if(NetworkUtilities.getConnectivityStatus(this)){
 
+
+                //from login
                 if (id != null) {
                     val i = Intent(this,WriteTaskActivity::class.java)
                     i.putExtra("id",id)
                     startActivity(i)
                 }
+
+                val j = Intent(this,WriteTaskActivity::class.java)
+                startActivity(j)
+
             }
             else{
                 Global.showSnackBar(view, resources.getString(R.string.no_internet))

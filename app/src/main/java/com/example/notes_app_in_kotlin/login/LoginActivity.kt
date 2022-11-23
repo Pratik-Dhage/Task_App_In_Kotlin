@@ -105,6 +105,8 @@ class LoginActivity : AppCompatActivity() {
                         //send user data to MainActivity
                         val id = auth.uid.toString()
 
+                        Global.saveStringInSharedPref(this,"id",id) //save id in SharedPref
+
                         val i = Intent(this, MainActivity::class.java)
                         i.putExtra("id",id)
                         startActivity(i)
