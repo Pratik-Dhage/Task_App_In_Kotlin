@@ -104,46 +104,7 @@ class TaskActivity : AppCompatActivity() {
 
     }
 
-    private fun initObserver() {
-        if(NetworkUtilities.getConnectivityStatus(this)) {
 
-
-            //val id = intent.getStringExtra("id")
-            val id = Global.getStringFromSharedPref(this,"id")
-            val randomKey = intent.getStringExtra("randomKey")
-
-            //Retrieve data from Firebase Database
-            if (id != null) {
-                if (randomKey != null) {
-                    database.child(id).child("tasks").child(randomKey).addValueEventListener(object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                           list.clear()
-
-                            for (dataSnapshot in snapshot.children) {
-                                val tasks = dataSnapshot.getValue(Tasks::class.java) // Users Class
-                                // users.setUserId(dataSnapshot.key)
-
-
-                                    list.add(tasks!!)
-
-                            }
-
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
-                        }
-
-                    })
-                }
-            }
-
-
-        }
-        else{
-            Global.showSnackBar(view,resources.getString(R.string.no_internet))
-        }
-    }
 
     private fun initializeFields() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_task)
