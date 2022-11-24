@@ -38,6 +38,13 @@ class TaskActivity : AppCompatActivity() {
 
     }
 
+    private fun initializeFields() {
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_task)
+        view= binding.root
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().getReference("Users")
+    }
+
     private fun setUpRecyclerViewOfTasks() {
 
         val recyclerView : RecyclerView = binding.rvTask
@@ -50,82 +57,104 @@ class TaskActivity : AppCompatActivity() {
         //fetch data from firebase
         val id = Global.getStringFromSharedPref(this,"id")
         val randomKey = intent.getStringExtra("randomKey")
+       val otherId = intent.getStringExtra("otherId")
 
-        if (randomKey != null) {
-            database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
 
-                    if(snapshot.exists()){
+        // if clicking on current user
+        if(otherId==null){
 
-                        for(idd in snapshot.children){
+            if (randomKey != null) {
+                database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
 
-                            val d = idd.getValue(Tasks::class.java)
-                            list.add(d!!)
+                        if(snapshot.exists()){
+
+                            for(idd in snapshot.children){
+
+                                val d = idd.getValue(Tasks::class.java)
+                                list.add(d!!)
+                            }
+                            binding.rvTask.adapter = TaskAdapter(list)
+                            recyclerView.adapter = TaskAdapter(list)
                         }
-                        binding.rvTask.adapter = TaskAdapter(list)
-                        recyclerView.adapter = TaskAdapter(list)
+
                     }
 
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-
-            })
-        }
-
-        else{
-
-            database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-
-                    if(snapshot.exists()){
-
-                        for(idd in snapshot.children){
-
-                            val d = idd.getValue(Tasks::class.java)
-                            list.add(d!!)
-                        }
-                        binding.rvTask.adapter = TaskAdapter(list)
-                        recyclerView.adapter = TaskAdapter(list)
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
                     }
 
-                }
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+                })
+            }
+
+            else{
+
+                database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+
+                        if(snapshot.exists()){
+
+                            for(idd in snapshot.children){
+
+                                val d = idd.getValue(Tasks::class.java)
+                                list.add(d!!)
+                            }
+                            binding.rvTask.adapter = TaskAdapter(list)
+                            recyclerView.adapter = TaskAdapter(list)
+                        }
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
 
 
-            })
+                })
+            }
+
+
         }
+
+        //if clicking on other users
+       if(otherId!=null)
+        {
+
+            otherUsers()
+
+        }
+
+
+    }
+
+    // for Other Users Individual Tasks
+
+    fun otherUsers(){
 
         // for Other Users Individual Tasks
 
-        val idKey = intent.getStringExtra("idKey") // this is Users Node
+        val otherId = intent.getStringExtra("otherId")
 
-
-            database.addValueEventListener(object : ValueEventListener{
+        if (otherId != null) {
+            database.child(otherId).child("tasks").addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     if(snapshot.exists()){
 
                         for(idd in snapshot.children){
 
-                            val f = idd.getValue(Users::class.java)
+
                             val d = idd.getValue(Tasks::class.java)
 
-
-
                             //condition to not include self user
-
-
+                            if(otherId!=FirebaseAuth.getInstance().uid){
                                 list.add(d!!)
+                            }
 
                         }
                         binding.rvTask.adapter = TaskAdapter(list)
+                        val recyclerView : RecyclerView = binding.rvTask
                         recyclerView.adapter = TaskAdapter(list)
                     }
 
@@ -137,18 +166,12 @@ class TaskActivity : AppCompatActivity() {
 
 
             })
-
+        }
 
     }
 
 
 
-    private fun initializeFields() {
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_task)
-        view= binding.root
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().getReference("Users")
-    }
 
 
 

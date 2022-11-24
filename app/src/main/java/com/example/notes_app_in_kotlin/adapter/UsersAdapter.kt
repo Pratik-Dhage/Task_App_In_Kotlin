@@ -42,24 +42,17 @@ class UsersAdapter(var list: ArrayList<Users>) : RecyclerView.Adapter<UsersAdapt
             var database: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
             database.get().addOnSuccessListener {
 
-                val idKey = it.key.toString() //Users Node
+
+                val otherId = a.id // send Clicked Other User's id to Task Activity
 
 
-                Global.showToast(context,idKey) //Users Node
+              //  Global.showToast(context,otherId)
 
                 val i = Intent(context, TaskActivity::class.java)
-                i.putExtra("idKey",idKey)
+                i.putExtra("otherId",otherId)
+
 
                 context.startActivity(i)
-
-                database.get().addOnSuccessListener {
-
-                        Global.showToast(context,it.childrenCount.toString())
-
-
-
-
-                }
 
 
             }
