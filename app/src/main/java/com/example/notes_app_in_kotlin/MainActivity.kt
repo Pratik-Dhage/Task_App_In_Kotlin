@@ -50,6 +50,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun onClickListener() {
 
+        //on Click other users
+      //  binding.rvMain
+
+
+        //SignOut
         binding.txtSignOut.setOnClickListener {
             SharedPreferencesHelper.clearSharedPreferences()
             Global.removeStringInSharedPref(this,"id")
@@ -228,7 +233,7 @@ class MainActivity : AppCompatActivity() {
             })*/
 
             if (id != null) {
-                database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
+                database.addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
 
                         if(snapshot.exists()){
@@ -236,7 +241,12 @@ class MainActivity : AppCompatActivity() {
                             for(idd in snapshot.children){
 
                                 val d = idd.getValue(Users::class.java)
-                                list.add(d!!)
+
+                                //condition to not include current user
+                                if(d?.name!=binding.txtUserName.text.toString()){
+                                    list.add(d!!)
+                                }
+
                             }
                             binding.rvMain.adapter = UsersAdapter(list)
                             val recyclerView : RecyclerView = binding.rvMain
@@ -256,7 +266,7 @@ class MainActivity : AppCompatActivity() {
         else {
 
             val id = Global.getStringFromSharedPref(this,"id")
-                database.child(id).child("tasks").addValueEventListener(object : ValueEventListener{
+                database.addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
 
                         if(snapshot.exists()){
@@ -264,7 +274,12 @@ class MainActivity : AppCompatActivity() {
                             for(idd in snapshot.children){
 
                                 val d = idd.getValue(Users::class.java)
-                                list.add(d!!)
+
+
+                                //condition to not include current user
+                                if(d?.name!=binding.txtUserName.text.toString()){
+                                    list.add(d!!)
+                                }
                             }
                             binding.rvMain.adapter = UsersAdapter(list)
                             val recyclerView : RecyclerView = binding.rvMain

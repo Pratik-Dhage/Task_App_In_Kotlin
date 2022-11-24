@@ -102,6 +102,43 @@ class TaskActivity : AppCompatActivity() {
             })
         }
 
+        // for Other Users Individual Tasks
+
+        val idKey = intent.getStringExtra("idKey") // this is Users Node
+
+
+            database.addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    if(snapshot.exists()){
+
+                        for(idd in snapshot.children){
+
+                            val f = idd.getValue(Users::class.java)
+                            val d = idd.getValue(Tasks::class.java)
+
+
+
+                            //condition to not include self user
+
+
+                                list.add(d!!)
+
+                        }
+                        binding.rvTask.adapter = TaskAdapter(list)
+                        recyclerView.adapter = TaskAdapter(list)
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+
+            })
+
+
     }
 
 
